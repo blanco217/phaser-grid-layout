@@ -81,7 +81,7 @@ class GridLayout {
 
   drawBounds( parent ) {
     if (!this.debugRect) {
-      this.debugRect = this.addDebugRect(parent)
+      this.debugRect = this._addDebugRect(parent)
     }
     this.debugRect.clear()
                   .beginFill(0xff0000, .5)
