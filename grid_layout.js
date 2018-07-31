@@ -19,7 +19,8 @@ class GridLayout {
       numRows: 4,
       xPadding: 3,
       yPadding: 4,
-      layout: GridLayout.center // there are different layout functions to choose from, or create your own custom one!
+      layout: GridLayout.center, // there are different layout functions to choose from, or create your own custom one!
+      rectFill: '0xff0000'
     })
 
     for (var i = 0; i < 10; i++) {
@@ -44,7 +45,8 @@ class GridLayout {
       numRows: 1,
       xPadding: 1,
       yPadding: 1,
-      layout: GridLayout.xy
+      layout: GridLayout.xy,
+      rectFill: '0xff0000'
     }
 
     _.extend(this, defaultOptions, options)
@@ -83,8 +85,9 @@ class GridLayout {
     if (!this.debugRect) {
       this.debugRect = this._addDebugRect(parent)
     }
+    
     this.debugRect.clear()
-                  .beginFill(0xff0000, .5)
+                  .beginFill(this.rectFill, .5)
                   .drawRect(this.bounds.x, this.bounds.y, this.bounds.width, this.bounds.height)
   }
 
