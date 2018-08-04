@@ -20,7 +20,8 @@ class GridLayout {
       xPadding: 3,
       yPadding: 4,
       layout: GridLayout.center, // there are different layout functions to choose from, or create your own custom one!
-      rectFill: '0xff0000'
+      rectFill: '0xff0000',
+      debugMode: false
     })
 
     for (var i = 0; i < 10; i++) {
@@ -46,7 +47,8 @@ class GridLayout {
       xPadding: 1,
       yPadding: 1,
       layout: GridLayout.xy,
-      rectFill: '0xff0000'
+      rectFill: '0xff0000',
+      debugMode: false
     }
 
     _.extend(this, defaultOptions, options)
@@ -85,7 +87,7 @@ class GridLayout {
     if (!this.debugRect) {
       this.debugRect = this._addDebugRect(parent)
     }
-    
+
     this.debugRect.clear()
                   .beginFill(this.rectFill, .5)
                   .drawRect(this.bounds.x, this.bounds.y, this.bounds.width, this.bounds.height)
@@ -121,7 +123,7 @@ class GridLayout {
         column = 0
         if (++row >= this.numRows) {
           row = 0
-          console.warn('items have wrapped around')
+          this._debugMessage('items have wrapped around')
         }
       }
     }
@@ -138,7 +140,7 @@ class GridLayout {
         row = 0
         if (++column >= this.numColumns) {
           column = 0
-          console.warn('items have wrapped around')
+          this._debugMessage('items have wrapped around')
         }
       }
     }
@@ -151,6 +153,12 @@ class GridLayout {
     const y = this.bounds.y + row * height + this.yPadding * row
     if (item.layout) item.layout(x, y, width, height) // custom item layout function
     else if (this.layout) this.layout.call(item, x, y, width, height)
+  }
+
+  _debugMessage(msg) {
+    if (this.debugMode) {
+      console.debug(msg)
+    }
   }
 }
 
